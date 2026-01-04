@@ -52,14 +52,8 @@ func TestInt_Gitlab(t *testing.T) {
 			"See https://github.com/paketo-buildpacks/nodejs/issues/712")
 	}
 
-	// Skip in CI due to persistent timeout issues regardless of allocated time
-	// Note it does indeed run locally.
-	// TODO: Investigate why GitLab webhook builds are not completing in CI
-	// https://github.com/knative/func/issues/3212
-	if os.Getenv("CI") == "true" || os.Getenv("GITHUB_ACTIONS") == "true" {
-		t.Skip("Skipping GitLab test in CI due to persistent timeout issues. " +
-			"Please run GitLab integration tests locally with 'make test-integration' to verify changes.")
-	}
+	// Re-enabled: The test was disabled due to persistent timeout issues (issue #3212).
+	// Re-enabling to verify if the issue was transient or requires further adjustment.
 
 	var err error
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
